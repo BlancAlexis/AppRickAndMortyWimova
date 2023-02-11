@@ -1,4 +1,4 @@
-package fr.alexis.apprickandmorty;
+package fr.alexis.apprickandmorty.recyclerPerso;
 
 import android.content.Intent;
 import android.view.View;
@@ -10,12 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
+import fr.alexis.apprickandmorty.MainActivity;
+import fr.alexis.apprickandmorty.R;
+import fr.alexis.apprickandmorty.TabPerso;
+import fr.alexis.apprickandmorty.ViewEpi;
+import fr.alexis.apprickandmorty.pop_up;
 
-public class MyViewHolder extends RecyclerView.ViewHolder {
+public class MyViewHolderPerso extends RecyclerView.ViewHolder {
 
 
-   // MainActivity mainActivity=MainActivity.getInstance();
+    MainActivity mainActivity=MainActivity.getInstance();
     TextView nom,genre,race;;
     ImageView image;
 
@@ -26,20 +30,22 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 /*    public void onDelete(){}
 
     public void onMore(){}*/
-    public MyViewHolder(@NonNull View itemView) {
+    public MyViewHolderPerso(@NonNull View itemView) {
         super(itemView);
         image = itemView.findViewById(R.id.photo);
 
-        nom = itemView.findViewById(R.id.nom);
-        genre = itemView.findViewById(R.id.genre);
-        race = itemView.findViewById(R.id.race);
+        nom = itemView.findViewById(R.id.titreEpi);
+        genre = itemView.findViewById(R.id.dateSortie);
+        race = itemView.findViewById(R.id.numEpi);
         more = itemView.findViewById(R.id.more);
         delete = itemView.findViewById(R.id.delete);
+
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("yorergat");
-                pop_up customPopup=new pop_up(getAdapterPosition());
+                pop_up customPopup=new pop_up(mainActivity.getActivity());
+                customPopup.build(getAdapterPosition());
                 customPopup.getYesButton().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -49,8 +55,10 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 customPopup.getNoButton().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent passage=new Intent(MyViewHolder.class,MainActivity.this);
-
+                        Intent passage;
+                        passage=new Intent(mainActivity.getActivity(), ViewEpi.class);
+                        passage.putExtra("position",getAdapterPosition());
+                        mainActivity.startActivity(passage);
                     }
                 });
 
@@ -60,9 +68,12 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
           //      pop_up customPopup=new pop_up(getAdapterPosition());
-                System.out.println(getAdapterPosition());
+                System.out.println("yo"+getAdapterPosition());
+                Toast.makeText(mainActivity.getBaseContext(),"Personnage "+listData.getListPerso().get(getAdapterPosition()).getName()+" supprimé", Toast.LENGTH_SHORT).show();
                 listData.getListPerso().remove(getAdapterPosition());
-                Snackbar.make(delete.getContext(),"Personnage "+listData.getListPerso().get(getAdapterPosition()).getName()+" supprimé", Snackbar.LENGTH_SHORT).show();
+
+mainActivity.getAdapter().notifyDataSetChanged();
+               // Snackbar.make(mainActivity.getBaseContext(),"Personnage "+listData.getListPerso().get(getAdapterPosition()).getName()+" supprimé", Snackbar.LENGTH_SHORT).show();
                // mainActivity.ada
             //    v.getApplicationWindowToken()
 //customPopup.build();

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10dp">
 
 
     <ImageView
@@ -24,47 +25,33 @@
 
 
     <TextView
-        android:id="@+id/pop_age"
-        android:layout_width="33dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="@color/black" />
-
-
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Détail"
-    />
-
-    <TextView
         android:id="@+id/pop_num_epi"
         android:layout_width="157dp"
         android:layout_height="31dp"
         android:layout_margin="5dp"
         android:textColor="@color/black" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
 
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/noButton"
-            android:text="Retour"
-            android:backgroundTint="@color/black"
-            android:layout_margin="5dp"/>
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="Info épisode" />
         <Button
             android:id="@+id/yesButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:backgroundTint="@color/black"
             android:text="Valider" />
 
 
-
+</LinearLayout>
 
 
 </LinearLayout>

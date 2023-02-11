@@ -13,8 +13,8 @@ public interface RequestAPI {
     Call<Characters> getAllCharacter(@Path("id") int itérateur);
     @GET("character/info/count")
     Call<Integer> getCountCharacter();
-    @GET("episode/{num]")
-    Call<Episode> getEpisodeDetail();
+    @GET("episode/{id}")
+    Call<Episode> getEpisodeDetail(@Path("id") int itérateur);
 /*    @GET("episodes")
     Call<Episode> getAllEpisode();*/
 

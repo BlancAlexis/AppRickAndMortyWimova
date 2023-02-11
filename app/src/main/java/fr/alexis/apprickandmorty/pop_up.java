@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 public class pop_up extends Dialog {
 
     private final TextView titre;
-    private final TextView age;
     private final TextView episode;
     private final ImageView pop_photo;
     private final Button yesButton;
@@ -23,7 +22,6 @@ public class pop_up extends Dialog {
         setContentView(R.layout.popup);
         this.pop_photo = findViewById(R.id.pop_photo);
         this.titre = findViewById(R.id.pop_nom);
-        this.age = findViewById(R.id.pop_age);
         this.episode = findViewById(R.id.pop_num_epi);
         this.yesButton = findViewById(R.id.yesButton);
         this.noButton = findViewById(R.id.noButton);
@@ -47,12 +45,11 @@ public class pop_up extends Dialog {
         show();
     }
 
-    public void build(int choix) {
+    public void build(int position) {
         TabPerso listPerso = TabPerso.getInstance();
-        Picasso.get().load(listPerso.getListPerso().get(0).getImage()).into(pop_photo);
-        titre.setText(listPerso.getListPerso().get(0).getName());
-        age.setText(listPerso.getListPerso().get(0).getStatus());
-        //episode.setText(listPerso.getListPerso().get(position).getAllEpisode());
+        Picasso.get().load(listPerso.getListPerso().get(position).getImage()).into(pop_photo);
+        titre.setText(listPerso.getListPerso().get(position).getName());
+        episode.setText(listPerso.getListPerso().get(position).getEpisode());
         show();
     }
 }

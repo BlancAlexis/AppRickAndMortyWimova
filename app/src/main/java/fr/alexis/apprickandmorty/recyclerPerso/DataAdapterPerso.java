@@ -1,27 +1,24 @@
-package fr.alexis.apprickandmorty;
+package fr.alexis.apprickandmorty.recyclerPerso;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
+import fr.alexis.apprickandmorty.R;
+import fr.alexis.apprickandmorty.TabPerso;
 
-public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class DataAdapterPerso extends RecyclerView.Adapter<MyViewHolderPerso> {
 
     Context context;
 
     private final TabPerso listPerso;
 
-    public DataAdapter(Context context, TabPerso listPerso) {
+    public DataAdapterPerso(Context context, TabPerso listPerso) {
         this.context = context;
         this.listPerso = listPerso;
     }
@@ -29,15 +26,15 @@ public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.pattern, parent, false));
+    public MyViewHolderPerso onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MyViewHolderPerso(LayoutInflater.from(context).inflate(R.layout.patternperso, parent, false));
 
     }
 
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolderPerso holder, int position) {
         Picasso.get().load(listPerso.getListPerso().get(position).getImage()).into(holder.image);
         holder.nom.setText(listPerso.getListPerso().get(position).getName());
         holder.genre.setText(listPerso.getListPerso().get(position).getStatus());

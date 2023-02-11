@@ -92,7 +92,15 @@ public class Characters {
         this.image = image;
     }
 
-    public List<String> getEpisode() {
+    public String getEpisode() {
+        String texte=" épisode : ";
+        for (String s: episode)
+            texte+=s.substring(s.length()-2).replace("/","")+",";
+
+        return texte;
+    }
+
+    public List<String> getListpisode(){
         return episode;
     }
 

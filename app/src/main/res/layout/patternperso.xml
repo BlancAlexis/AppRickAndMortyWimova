@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nom"
+        android:id="@+id/titreEpi"
         android:layout_toEndOf="@id/photo"
         android:textColor="@color/black"
         android:textSize="20dp"
@@ -26,18 +26,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/race"
+        android:id="@+id/numEpi"
         android:layout_toEndOf="@id/photo"
-        android:layout_below="@id/nom"
+        android:layout_below="@id/titreEpi"
         android:textColor="@color/black"
         tools:text="emial@email.com"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/genre"
-        android:layout_toEndOf="@id/race"
-        android:layout_below="@id/nom"
+        android:id="@+id/dateSortie"
+        android:layout_toEndOf="@id/numEpi"
+        android:layout_below="@id/titreEpi"
         android:textColor="@color/black"
         android:layout_marginLeft="10sp"
         tools:text="cmoiilo"/>
@@ -64,7 +64,7 @@
         android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/genre"
+        android:layout_toEndOf="@id/dateSortie"
         android:background="@drawable/more" />
 
 </RelativeLayout>

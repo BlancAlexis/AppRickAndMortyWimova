@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/photo"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titreEpi"
+        android:layout_toEndOf="@id/photo"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:text="Name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numEpi"
+        android:layout_toEndOf="@id/photo"
+        android:layout_below="@id/titreEpi"
+        android:textColor="@color/black"
+        tools:text="emial@email.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateSortie"
+        android:layout_toEndOf="@id/numEpi"
+        android:layout_below="@id/titreEpi"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10sp"
+        tools:text="cmoiilo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/photo"
+        android:layout_marginTop="10dp"
+        android:background="#DAD8D8"/>
+
+
+</RelativeLayout>
