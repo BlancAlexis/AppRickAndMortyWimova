@@ -30,9 +30,8 @@ android {
 
 dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0' //Dépendance rétrofit
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation   'com.squareup.moshi:moshi:1.12.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' //Converteur JSON servant à retrofit
+    implementation 'com.squareup.picasso:picasso:2.71828' //Pour récupérer l'image de l'API
 
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'

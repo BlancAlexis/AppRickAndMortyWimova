@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 
 public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -19,10 +21,11 @@ public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private final TabPerso listPerso;
 
-    public DataAdapter(Context context) {
+    public DataAdapter(Context context, TabPerso listPerso) {
         this.context = context;
-        this.listPerso = TabPerso.getInstance();
+        this.listPerso = listPerso;
     }
+
 
     @NonNull
     @Override
@@ -35,9 +38,11 @@ public class DataAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nom.setText(listPerso.getListPerso().get(1).getName());
-        holder.genre.setText(listPerso.getListPerso().get(1).getStatus());
-        holder.race.setText(listPerso.getListPerso().get(1).getSpecies());
+        Picasso.get().load(listPerso.getListPerso().get(position).getImage()).into(holder.image);
+        holder.nom.setText(listPerso.getListPerso().get(position).getName());
+        holder.genre.setText(listPerso.getListPerso().get(position).getStatus());
+        holder.race.setText(listPerso.getListPerso().get(position).getSpecies());
+
 
     }
 
