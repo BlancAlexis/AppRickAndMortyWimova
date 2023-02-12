@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 public interface RequestAPI {
     @GET("character/{id}")
     Call<Characters> getAllCharacter(@Path("id") int itérateur);
-    @GET("character/info/count")
-    Call<Integer> getCountCharacter();
+//    @GET("character/info/count")
+//    Call<Integer> getCountCharacter();
     @GET("episode/{id}")
     Call<Episode> getEpisodeDetail(@Path("id") int itérateur);
 /*    @GET("episodes")

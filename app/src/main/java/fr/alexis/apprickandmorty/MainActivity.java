@@ -83,6 +83,18 @@ instance=this;
             });
         }
 
+        service.getEpisodeDetail(1).enqueue(new Callback<Episode>() {
+            @Override
+            public void onResponse(Call<Episode> call, Response<Episode> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Episode> call, Throwable t) {
+
+            }
+        });
+
 
         System.out.println("fini");
        /* @Override

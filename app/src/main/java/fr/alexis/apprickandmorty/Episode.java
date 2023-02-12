@@ -14,7 +14,7 @@ public class Episode {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNameEpi() {
         return name;
     }
 

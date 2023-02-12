@@ -32,7 +32,7 @@ public class DataAdapterEpi extends RecyclerView.Adapter<MyViewHolderEpi> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderEpi holder, int position) {
-            holder.nomEpi.setText(listEpi.getListEpi().get(position).getName());
+            holder.nomEpi.setText(listEpi.getListEpi().get(position).getNameEpi());
             holder.dateSortie.setText(listEpi.getListEpi().get(position).getAir_date());
             holder.numEpi.setText(listEpi.getListEpi().get(position).getEpisode());
 

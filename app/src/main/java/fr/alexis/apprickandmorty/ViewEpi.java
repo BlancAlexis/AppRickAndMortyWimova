@@ -35,10 +35,10 @@ public class ViewEpi extends AppCompatActivity {
         recyclerView.setAdapter(dataAdapterEpi);
 
 
-        retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
+        retrofit2.Retrofit retrofitEpi = new retrofit2.Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RequestAPI service = retrofit.create(RequestAPI.class);
+        RequestAPI serviceEpi = retrofitEpi.create(RequestAPI.class);
 
         Intent intent = getIntent();
         listEpisode=TabPerso.getInstance().getListPerso().get(Integer.parseInt(intent.getExtras().get("position").toString())).getListpisode();
@@ -46,11 +46,12 @@ public class ViewEpi extends AppCompatActivity {
         for (int i = 0; i < listEpisode.size(); i++) {
 
             Snackbar.make(recyclerView.getRootView(), "Merci d'attendre la fin du chargement avant de tenter toutes modifications", Snackbar.LENGTH_LONG).show();
+           // int posi=Integer.parseInt(listEpisode.get(i));
 
-
-            service.getEpisodeDetail(i).enqueue(new Callback<Episode>() {
+            serviceEpi.getEpisodeDetail(6).enqueue(new Callback<Episode>() {
                 @Override
                 public void onResponse(Call<Episode> call, Response<Episode> response) {
+                    Episode t=response.body();
                     tabEpisode.getListEpi().add(response.body());
                     dataAdapterEpi.notifyDataSetChanged();
                 }
