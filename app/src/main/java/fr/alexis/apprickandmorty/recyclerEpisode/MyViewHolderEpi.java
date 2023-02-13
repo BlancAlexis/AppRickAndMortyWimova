@@ -14,10 +14,6 @@ public class MyViewHolderEpi extends RecyclerView.ViewHolder {
     TextView nomEpi, dateSortie, numEpi;
 
 
-
-/*    public void onDelete(){}
-
-    public void onMore(){}*/
     public MyViewHolderEpi(@NonNull View itemView) {
         super(itemView);
         nomEpi = itemView.findViewById(R.id.titreEpi);

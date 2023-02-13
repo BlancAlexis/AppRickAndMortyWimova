@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import fr.alexis.apprickandmorty.recyclerEpisode.DataAdapterEpi;
@@ -29,38 +31,21 @@ public class ViewEpi extends AppCompatActivity {
 
         TabEpi tabEpisode=TabEpi.getInstance();
 
-        DataAdapterEpi dataAdapterEpi = new DataAdapterEpi(getApplicationContext(), tabEpisode);
+
+        Intent intent = getIntent();
+        listEpisode=TabPerso.getInstance().getListPerso().get(Integer.parseInt(intent.getExtras().get("position").toString())).getListpisode();
+
+        ArrayList<Episode> afficher=new ArrayList<>();
+        DataAdapterEpi dataAdapterEpi = new DataAdapterEpi(getApplicationContext(), afficher);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewEpi);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(dataAdapterEpi);
 
 
-        retrofit2.Retrofit retrofitEpi = new retrofit2.Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RequestAPI serviceEpi = retrofitEpi.create(RequestAPI.class);
-
-        Intent intent = getIntent();
-        listEpisode=TabPerso.getInstance().getListPerso().get(Integer.parseInt(intent.getExtras().get("position").toString())).getListpisode();
-
-        for (int i = 0; i < listEpisode.size(); i++) {
-
-            Snackbar.make(recyclerView.getRootView(), "Merci d'attendre la fin du chargement avant de tenter toutes modifications", Snackbar.LENGTH_LONG).show();
-           // int posi=Integer.parseInt(listEpisode.get(i));
-
-            serviceEpi.getEpisodeDetail(6).enqueue(new Callback<Episode>() {
-                @Override
-                public void onResponse(Call<Episode> call, Response<Episode> response) {
-                    Episode t=response.body();
-                    tabEpisode.getListEpi().add(response.body());
-                    dataAdapterEpi.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onFailure(Call<Episode> call, Throwable t) {
-
-                }
-            });
+        for(int i=0;i<listEpisode.size();i++){
+            afficher.add(tabEpisode.getListEpi().get(Integer.parseInt(listEpisode.get(i).substring(listEpisode.get(i).length()-2).replace("/",""))-1));
+            dataAdapterEpi.notifyDataSetChanged();
         }
+
     }
 }

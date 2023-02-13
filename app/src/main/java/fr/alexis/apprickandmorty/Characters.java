@@ -95,7 +95,7 @@ public class Characters {
     public String getEpisode() {
         String texte=" épisode : ";
         for (String s: episode)
-            texte+=s.substring(s.length()-2).replace("/","")+",";
+            texte+=s.substring(s.length()-2).replace("/","")+".";
 
         return texte;
     }

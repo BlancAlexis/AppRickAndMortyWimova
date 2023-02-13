@@ -37,7 +37,7 @@ public class DataAdapterPerso extends RecyclerView.Adapter<MyViewHolderPerso> {
     public void onBindViewHolder(@NonNull MyViewHolderPerso holder, int position) {
         Picasso.get().load(listPerso.getListPerso().get(position).getImage()).into(holder.image);
         holder.nom.setText(listPerso.getListPerso().get(position).getName());
-        holder.genre.setText(listPerso.getListPerso().get(position).getStatus());
+        holder.statue.setText(listPerso.getListPerso().get(position).getStatus());
         holder.race.setText(listPerso.getListPerso().get(position).getSpecies());
 
 

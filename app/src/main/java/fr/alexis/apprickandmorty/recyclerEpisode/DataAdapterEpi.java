@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import fr.alexis.apprickandmorty.Episode;
 import fr.alexis.apprickandmorty.R;
 import fr.alexis.apprickandmorty.TabEpi;
 import fr.alexis.apprickandmorty.recyclerPerso.MyViewHolderPerso;
@@ -15,11 +18,11 @@ public class DataAdapterEpi extends RecyclerView.Adapter<MyViewHolderEpi> {
 
     Context context;
 
-    private final TabEpi listEpi;
+    private  ArrayList<Episode> listEpi;
 
-    public DataAdapterEpi(Context context, TabEpi listEpi) {
+    public DataAdapterEpi(Context context, ArrayList<Episode> epi) {
         this.context = context;
-        this.listEpi = listEpi;
+        this.listEpi = epi;
     }
 
 
@@ -32,9 +35,9 @@ public class DataAdapterEpi extends RecyclerView.Adapter<MyViewHolderEpi> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderEpi holder, int position) {
-            holder.nomEpi.setText(listEpi.getListEpi().get(position).getNameEpi());
-            holder.dateSortie.setText(listEpi.getListEpi().get(position).getAir_date());
-            holder.numEpi.setText(listEpi.getListEpi().get(position).getEpisode());
+            holder.nomEpi.setText(listEpi.get(position).getNameEpi());
+            holder.dateSortie.setText(listEpi.get(position).getAir_date());
+            holder.numEpi.setText(listEpi.get(position).getEpisode());
 
         }
 
@@ -42,6 +45,6 @@ public class DataAdapterEpi extends RecyclerView.Adapter<MyViewHolderEpi> {
     @Override
 
     public int getItemCount() {
-        return listEpi.getListEpi().size();
+        return listEpi.size();
     }
 }

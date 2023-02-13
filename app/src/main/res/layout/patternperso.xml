@@ -6,13 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:id="@+id/photo"
         android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
-        />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -45,26 +44,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/photo"
+        android:layout_below="@id/dateSortie"
         android:layout_marginTop="10dp"
         android:background="#DAD8D8"/>
 
-
-
-
-    <ImageButton
-
-        android:id="@+id/delete"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/more"
-        android:background="@drawable/delete" />
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true">
 
-    <ImageButton
-        android:id="@+id/more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/dateSortie"
-        android:background="@drawable/more" />
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/delete" />
 
+
+        <ImageButton
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/delete"
+            android:background="@drawable/more" />
+
+
+
+
+    </RelativeLayout>
 </RelativeLayout>

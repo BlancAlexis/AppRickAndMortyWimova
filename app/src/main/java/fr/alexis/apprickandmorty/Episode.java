@@ -1,16 +1,16 @@
 package fr.alexis.apprickandmorty;
 
 public class Episode {
-    private int id;
+    private String id;
     private String name;
     private String air_date;
-    private int episode;
+    private String episode;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -30,11 +30,11 @@ public class Episode {
         this.air_date = air_date;
     }
 
-    public int getEpisode() {
+    public String getEpisode() {
         return episode;
     }
 
-    public void setEpisode(int episode) {
+    public void setEpisode(String episode) {
         this.episode = episode;
     }
 }
