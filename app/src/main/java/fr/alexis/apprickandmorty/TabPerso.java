@@ -33,6 +33,10 @@ public void getAllEpisode(TabPerso list){
     public TabPerso(){
         listPerso =new ArrayList<Characters>();
     }
+
+    public void addAll(List<Characters> cha){
+        listPerso.addAll(cha);
+    }
     public void addPerso(Characters chara){
         listPerso.add(chara);
     }

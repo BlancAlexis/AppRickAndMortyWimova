@@ -3,6 +3,7 @@ package fr.alexis.apprickandmorty;
 import static okhttp3.internal.Internal.instance;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TabEpi {
     private static volatile TabEpi instanceTabEpi;
@@ -32,5 +33,9 @@ public class TabEpi {
 
     public void setListEpi(ArrayList<Episode> listEpi) {
         this.listEpi = listEpi;
+    }
+
+    public void addAll(List<Episode> epi){
+        listEpi.addAll(epi);
     }
 }

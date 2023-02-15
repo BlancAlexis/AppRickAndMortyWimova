@@ -12,23 +12,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
-import java.util.List;
 
 import fr.alexis.apprickandmorty.recyclerPerso.DataAdapterPerso;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
     private static volatile MainActivity instance;
     DataAdapterPerso dataAdapterPerso;
+    Snackbar snackWait;
+    int pageCountChara=1;
+    int pageCountEpi=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,94 +49,75 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         RequestAPI service = retrofit.create(RequestAPI.class);
 
-        //Call<Integer> countCharacter = service.getCountCharacter();
-        //int count=
-        // System.out.println(parseInt(countCharacter.toString()));
-      /*  Call<Integer> call=service.getCountCharacter();
-        try {
-            Response<Integer> response = call.execute();
-            if (response.isSuccessful()) {
-                int count = response.body();
-                System.out.println(count);
-                // int numberOfCharacters = result.getInfo().getCount();
-            } else {
-                Log.e("Erreur request count","Request failed with error code: " + response.code());
-            }
-        } catch (IOException e) {
-            Toast.makeText(this, "Erreur request API", Toast.LENGTH_SHORT).show();
-            Log.e("Erreur request count","Request failed with exception: " + e.getMessage());
-        }
 
-       */
+        getPageChara(service);
+        getPageEpisode(service);
 
-      /*  service.getEpisodeDetail().enqueue(new Callback<List<Episode>>() {
-            @Override
-            public void onResponse(Call<List<Episode>> call, Response<List<Episode>> response) {
-                System.out.println("RAFGAZHSDEJFRKEGFXBKVS<J?NHFD");
-                Log.e("J'ai QUELQUECHOSE","YO BEBOU");
-                System.out.println(response.body());
-            }
 
-            @Override
-            public void onFailure(Call<List<Episode>> call, Throwable t) {
-
-            }
-        });*/
-        Snackbar snackWait = Snackbar.make(recyclerView, "Merci de patienter pendant le chargement", 20000);
+        snackWait=Snackbar.make(recyclerView, "Merci de patienter pendant le chargement", 20000);
         snackWait.setBackgroundTint(Color.GRAY).show();
 
-        for (int i = 1; i < 827; i++) {
-
-            service.getAllCharacter(i).enqueue(new Callback<Characters>() {
-                @Override
-                public void onResponse(Call<Characters> call, Response<Characters> response) {
-                    if (response.isSuccessful()) {
-                        listPerso.addPerso(response.body());
-                        dataAdapterPerso.notifyDataSetChanged();
-                        System.out.println(listPerso.getCounts());
-                        if (listPerso.getListPerso().size()==825) {
-                            snackWait.dismiss();
-                            Toast.makeText(getApplicationContext(), "C'est partie", Toast.LENGTH_SHORT).show();
-
-
-                        }}else{
-                            Log.e("Erreur onResponse Character", "Données null");
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Characters> call, Throwable t) {
-                    Log.e("Erreur onFailure Character", "onFailure : " + t.toString());
-
-                }
-            });
-        }
-
-        TabEpi tabEpi = TabEpi.getInstance();
-        for (int i = 1; i < 52; i++) {
-            service.getEpisodeDetail(i).enqueue(new Callback<Episode>() {
-                @Override
-                public void onResponse(Call<Episode> call, Response<Episode> response) {
-                    if (response.isSuccessful()) {
-                        tabEpi.getListEpi().add(response.body());
-                        if(tabEpi.getListEpi().size()==51) {
-                            Collections.sort(tabEpi.getListEpi(), (e1, e2) -> Integer.valueOf(e1.getId()).compareTo(Integer.valueOf(e2.getId())));
-                        }
-
-                    }else{
-                        Log.e("Erreur on Response Episode", "Données null");
-                    }
-                }
-
-
-                @Override
-                public void onFailure(Call<Episode> call, Throwable t) {
-                    Log.e("Erreur onFailure Episode", "onFailure : " + t.toString());
-                }
-            });
-        }
    }
+    public void getPageChara(RequestAPI service){
+        TabPerso listPerso=TabPerso.getInstance();
+      service.getPageCharacters(pageCountChara).enqueue(new Callback<APIResponseChara>() {
+                @Override
+                public void onResponse(Call<APIResponseChara> call, Response<APIResponseChara> response) {
+                    if(response.isSuccessful()) {
+                        listPerso.addAll(response.body().getCharacters());
+                        dataAdapterPerso.notifyDataSetChanged();
+                        Info info = response.body().getInfo();
+                        if (info.getNext() != null) {
+                            pageCountChara++;
+                            getPageChara(service);
+                        } else {
+                            System.out.println("Tous les personnages sont chargé!");
+                            snackWait.dismiss();
+                            Toast.makeText(getApplicationContext(), "Prêt", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Log.e("Erreur", "Erreur de requête charactère");
+                        Toast.makeText(getApplicationContext(), "échec communication API",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            @Override
+            public void onFailure(Call<APIResponseChara> call, Throwable t) {
+                Log.e("Erreur", "Erreur charactère : "+t);
+                Toast.makeText(getApplicationContext(), "échec communication API",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void getPageEpisode(RequestAPI service){
+        TabEpi listEpi=TabEpi.getInstance();
+        service.getPageEpisodes(pageCountEpi).enqueue(new Callback<APIResponseEpi>() {
+            @Override
+            public void onResponse(Call<APIResponseEpi> call, Response<APIResponseEpi> response) {
+                System.out.println(listEpi.getListEpi().size()+"jsuuis gros");
+                if(response.isSuccessful()) {
+                    listEpi.addAll(response.body().getEpisodes());
+                    Info info = response.body().getInfo();
+                    if (info.getNext() != null) {
+                        pageCountEpi++;
+                        getPageEpisode(service);
+                    } else {
+                        Collections.sort(listEpi.getListEpi(), (e1, e2) -> Integer.valueOf(e1.getId()).compareTo(Integer.valueOf(e2.getId())));
+
+                    }
+                }else{
+                    Log.e("Erreur", "Erreur de requête épisode");
+                    Toast.makeText(getApplicationContext(), "échec communication API",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<APIResponseEpi> call, Throwable t) {
+                Log.e("Erreur ", "Erreur épisode : "+t);
+                Toast.makeText(getApplicationContext(), "échec communication API",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     public static MainActivity getInstance() {
         return instance;
