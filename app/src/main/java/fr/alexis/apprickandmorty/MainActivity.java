@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
@@ -22,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
     private static volatile MainActivity instance;
@@ -80,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });*/
-        Snackbar snackWait = Snackbar.make(recyclerView, "Merci de patienter pendant le chargement", 200000);
+        Snackbar snackWait = Snackbar.make(recyclerView, "Merci de patienter pendant le chargement", 20000);
         snackWait.setBackgroundTint(Color.GRAY).show();
 
-        for (int i = 0; i < 825; i++) {
+        for (int i = 1; i < 827; i++) {
 
             service.getAllCharacter(i).enqueue(new Callback<Characters>() {
                 @Override
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         listPerso.addPerso(response.body());
                         dataAdapterPerso.notifyDataSetChanged();
                         System.out.println(listPerso.getCounts());
-                        if (listPerso.getListPerso().size()==824) {
+                        if (listPerso.getListPerso().size()==825) {
                             snackWait.dismiss();
                             Toast.makeText(getApplicationContext(), "C'est partie", Toast.LENGTH_SHORT).show();
 

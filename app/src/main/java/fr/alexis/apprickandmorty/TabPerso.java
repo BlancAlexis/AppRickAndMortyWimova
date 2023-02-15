@@ -1,9 +1,10 @@
 package fr.alexis.apprickandmorty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TabPerso {
-    private ArrayList<Characters> listPerso;
+    private List<Characters> listPerso;
 
     private static volatile TabPerso instance;
 
@@ -39,7 +40,7 @@ public void getAllEpisode(TabPerso list){
     public void remove(int position){
         listPerso.remove(position);
     }
-    public ArrayList<Characters> getListPerso() {
+    public List<Characters> getListPerso() {
         return listPerso;
     }
     public int getCounts() {
